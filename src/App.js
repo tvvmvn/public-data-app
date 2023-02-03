@@ -13,48 +13,87 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-function fetchData(searchYearCd) {
-
-  const endPoint = 'https://apis.data.go.kr/B552061/frequentzoneBicycle/getRestFrequentzoneBicycle'
-  const serviceKey = process.env.REACT_APP_SERVICE_KEY;
-  const siDo = 11;
-  const goGun = 440;
-  const type = 'json';
-  const numOfRows = 10
-  const pageNo = 1
-
-  const promise = fetch(`${endPoint}?serviceKey=${serviceKey}&searchYearCd=${searchYearCd}&siDo=${siDo}&guGun=${goGun}&type=${type}&numOfRows=${numOfRows}&pageNo=${pageNo}`)
-    .then(res => {
-      if (!res.ok) {
-        throw res;
-      }
-      return res.json();
-    })
-
-  return promise;
-}
-
 export default function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [data, setData] = useState(null);
-  const [searchYearCd, setSearchYearCd] = useState(2015);
+  const [goGun, setGogun] = useState(680);
+  const [searchYearCd, setSearchYearCd] = useState(2018);
 
   console.log(data);
 
-  useEffect(() => {  
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  function fetchData() {
     setIsLoaded(false);
 
-    fetchData(searchYearCd)
-    .then(data => {
-      setData(data);
-    })
-    .catch(error => {
-      setError(error)
-    })
-    .finally(() => setIsLoaded(true))
-  }, [searchYearCd])
+    const endPoint = 'https://apis.data.go.kr/B552061/frequentzoneBicycle/getRestFrequentzoneBicycle'
+    const serviceKey = process.env.REACT_APP_SERVICE_KEY;
+    const siDo = 11;
+    const type = 'json';
+    const numOfRows = 10
+    const pageNo = 1
 
+    fetch(`${endPoint}?serviceKey=${serviceKey}&searchYearCd=${searchYearCd}&siDo=${siDo}&guGun=${goGun}&type=${type}&numOfRows=${numOfRows}&pageNo=${pageNo}`)
+      .then(res => {
+        if (!res.ok) {
+          throw res;
+        }
+        return res.json()
+      })
+      .then(data => {
+        setData(data);
+      })
+      .catch(error => {
+        setError(error)
+      })
+      .finally(() => {
+        setIsLoaded(true)
+      })
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    fetchData();
+  }
+
+  return (
+    <div style={{ margin: "1rem" }}>
+      <h1>서울특별시 자전거 사고조회 &#128561;</h1>
+
+      <form onSubmit={handleSubmit}>
+        <h2>지역과 연도를 선택하십시오</h2>
+        <div>
+          <label htmlFor=""></label>
+          <select name="goGun" value={goGun} onChange={({target}) => setGogun(target.value)}>
+            <option value="680">강남구</option>
+            <option value="440">마포구</option>
+            <option value="110">종로구</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor=""></label>
+          <select name="searchYearCd" value={searchYearCd} onChange={({target}) => setSearchYearCd(target.value)}>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+          </select>
+        </div>
+        <button type="submit" disabled={!isLoaded}>
+          Submit
+        </button>
+      </form>
+
+      <hr />
+
+      <List error={error} isLoaded={isLoaded} data={data} />
+    </div>
+  )
+}
+
+function List({error, isLoaded, data}) {
   if (error) {
     return <p>failed to fetch</p>
   }
@@ -63,32 +102,13 @@ export default function App() {
     return <p>fetching data...</p>
   }
 
-  return (
-    <div style={{margin: "1rem"}}>
-      <h1>{searchYearCd}년 서울특별시 마포구 자전거 사고조회 &#128561;</h1>
-
-      <h2>조회하실 연도를 선택하십시오</h2>
-      <div className="">
-        <button onClick={() => setSearchYearCd(searchYearCd - 1)}>&#10094; 이전년도</button>
-        <button onClick={() => setSearchYearCd(searchYearCd + 1)}>다음년도 &#10095;</button>
-      </div>
-
-      {data.totalCount > 0 ? (
-        <>
-          <h2>요약</h2>
-          <p>총 {data.totalCount}건의 사고가 발생했습니다</p>
-
-          <h2>Chart</h2>
-          <Rechart accidents={data.items.item} />
-
-          <h2>지도</h2>
-          <p>지도를 확대 또는 축소할 수 있습니다</p>
-          <KakaoMap accidents={data.items.item} />
-        </>
-      ) : (
-        <p>해당 년도 자료가 없습니다</p>
-      )}
-    </div>  
+  return data.totalCount > 0 ? (
+    <>
+      <Rechart accidents={data.items.item} />
+      <KakaoMap accidents={data.items.item} /> 
+    </>  
+  ) : (
+    <p>자료가 없습니다</p>  
   )
 }
 
