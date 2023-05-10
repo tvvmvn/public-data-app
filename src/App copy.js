@@ -27,29 +27,6 @@ const incheon = [
 
 const years = [2018, 2019, 2020];
 
-// 서버에 데이터를 요청하는 함수
-function fetchData(city, year) {
-
-  const endPoint = 'https://apis.data.go.kr/B552061/frequentzoneBicycle/getRestFrequentzoneBicycle'
-  const serviceKey = process.env.REACT_APP_SERVICE_KEY;
-  const type = 'json';
-  const numOfRows = 10;
-  const pageNo = 1;
-
-  // 자바스크립트에 내장된 fetch() 메서드를 사용하여 서버에 요청한다
-  const promise = fetch(`${endPoint}?serviceKey=${serviceKey}&searchYearCd=${year}&siDo=${city.siDo}&guGun=${city.goGun}&type=${type}&numOfRows=${numOfRows}&pageNo=${pageNo}`)
-    .then(res => {
-      // 서버의 응답코드(status)가 200(성공)이 아닌 경우 catch 블록에 응답 객체를 던진다
-      if (!res.ok) { 
-        throw res;
-      }
-      // 서버의 응답코드가 200인 경우 응답객체(프로미스 객체)를 리턴한다
-      return res.json();
-    })
-
-  return promise;
-}
-
 // 메인 컴포넌트 
 export default function App() {
 
@@ -100,6 +77,10 @@ export default function App() {
   )
 }
 
+function fetchData() {
+
+}
+
 // 대시보드 
 function Dashboard({ city, year }) {
 
@@ -109,21 +90,35 @@ function Dashboard({ city, year }) {
 
   useEffect(() => {
 
-    // 서버에 요청하기 전 사용자에게 대기 상태를 먼저 보여주어야 한다
+    const endPoint = 'https://apis.data.go.kr/B552061/frequentzoneBicycle/getRestFrequentzoneBicycle'
+    const serviceKey = process.env.REACT_APP_SERVICE_KEY;
+    const type = 'json';
+    const numOfRows = 10;
+    const pageNo = 1;
+
+    // 서버에 요청하기 전 사용자에게 대기 상태를 먼저 보여준다
     setIsLoaded(false); 
     setError(null);
 
-      // fetchData함수에 city와 year 변수를 전달한다
-      fetchData(city, year)
-        .then(data => {
-          console.log(data);
-          setData(data);
-        })
-        .catch(error => {
-          console.error(error);
-          setError(error)
-        })
-        .finally(() => setIsLoaded(true)); // 성공 실패와 관계없이 서버가 응답하면 대기상태를 해제한다
+    // 자바스크립트에 내장된 fetch() 메서드를 사용하여 서버에 요청한다
+    fetch(`${endPoint}?serviceKey=${serviceKey}&searchYearCd=${year}&siDo=${city.siDo}&guGun=${city.goGun}&type=${type}&numOfRows=${numOfRows}&pageNo=${pageNo}`)
+      .then(res => {
+        // 서버의 응답코드(status)가 200(성공)이 아닌 경우 catch 블록에 응답객체를 던진다
+        if (!res.ok) { 
+          throw res;
+        }
+        // 서버의 응답코드가 200인 경우 응답객체(프로미스 객체)를 리턴한다
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+        setData(data);
+      })
+      .catch(error => {
+        console.error(error);
+        setError(error)
+      })
+      .finally(() => setIsLoaded(true)); // 성공 실패와 관계없이 서버가 응답하면 대기상태를 해제한다
 
   }, [city, year]) // city 또는 year 변수가 업데이트되면 서버에 다시 데이터를 요청한다
 
@@ -155,7 +150,7 @@ function Dashboard({ city, year }) {
 // 리차트 (리액트 차트 라이브러리)
 function Rechart({ accidents }) {
 
-  console.log(accidents); // 데이터가 전달되었는지 확인 후 아래 코드를 작성하세요
+  console.log(accidents); // 데이터가 전달되었는지 확인 후 아래 코드로 이동하세요
 
   // 리차트가 요구하는 형식에 맞게 데이터를 구성한다
   const chartData = accidents.map(accident => {
@@ -193,7 +188,7 @@ function Rechart({ accidents }) {
 // 카카오 지도 
 function KakaoMap({ accidents }) {
 
-  console.log(accidents) // 데이터가 전달되었는지 확인 후 아래 코드를 작성하세요
+  console.log(accidents) // 데이터가 전달되었는지 확인 후 아래 코드로 이동하세요
 
   // MapInfoWindow 컴포넌트를 재사용한다
   const mapInfoWindows = accidents.map(accident => (

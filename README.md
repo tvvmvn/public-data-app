@@ -1,5 +1,5 @@
-# Public Data App
-Group Project
+# Public Data App 💃🏻
+
 
 ## 공공데이터 API
 ### 공공데이터 포털 
@@ -23,7 +23,20 @@ https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15056681
 ### Rechart
 [https://recharts.org/en-US](https://recharts.org/en-US)
 
-## Deploy with Github Pages
+
+
+## 디플로이 with Github Pages
 [https://github.com/gitname/react-gh-pages](https://github.com/gitname/react-gh-pages)
+
+
+
+## 역할 분담 예시 (4인 기준)
+1. 레이아웃 및 디자인 담당자
+2. 차트 담당자
+3. 카카오 지도 담당자
+4. 디플로이 담당자
+
+
+
 
 
