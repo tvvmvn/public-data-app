@@ -25,8 +25,7 @@ const incheon = [
   { siDo: 28, goGun: 170, name: '미추홀구' }
 ]
 
-const thisYear = new Date().getFullYear(); 
-const years = [thisYear - 1, thisYear - 2, thisYear - 3];
+const years = [2022, 2021, 2020];
 
 // 서버에 데이터를 요청하는 함수
 function fetchData(city, year) {
