@@ -25,7 +25,8 @@ const incheon = [
   { siDo: 28, goGun: 170, name: '미추홀구' }
 ]
 
-const years = [2018, 2019, 2020];
+const thisYear = new Date().getFullYear(); 
+const years = [thisYear - 1, thisYear - 2, thisYear - 3];
 
 // 서버에 데이터를 요청하는 함수
 function fetchData(city, year) {
@@ -53,11 +54,12 @@ function fetchData(city, year) {
 // 메인 컴포넌트 
 export default function App() {
 
-  const [year, setYear] = useState(2018);
+  const [year, setYear] = useState(years[0]);
   const [city, setCity] = useState(seoul[0]);
 
   return (
     <>
+      {/* Side Bar */}
       <nav>
         <h1>자전거 사고조회</h1>
         <section>
@@ -84,6 +86,7 @@ export default function App() {
         </section>
       </nav>
 
+      {/* 메인 */}
       <main>
         <div id="select-year">
           <select onChange={(e) => setYear(e.target.value)}>
@@ -93,7 +96,7 @@ export default function App() {
           </select>
         </div>
 
-        {/* 대시보드 */}
+        {/* 대시보드에 city와 year변수를 전달한다 */}
         <Dashboard city={city} year={year} />
       </main>
     </>
@@ -116,12 +119,10 @@ function Dashboard({ city, year }) {
       // fetchData함수에 city와 year 변수를 전달한다
       fetchData(city, year)
         .then(data => {
-          console.log(data);
           setData(data);
         })
         .catch(error => {
-          console.error(error);
-          setError(error)
+          setError(error);
         })
         .finally(() => setIsLoaded(true)); // 성공 실패와 관계없이 서버가 응답하면 대기상태를 해제한다
 

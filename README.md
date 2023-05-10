@@ -1,4 +1,4 @@
-# Public Data App 💃🏻
+# Public Data App 🚀
 
 
 ## 공공데이터 API
@@ -35,7 +35,6 @@ https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15056681
 2. 차트 담당자
 3. 카카오 지도 담당자
 4. 디플로이 담당자
-
 
 
 
