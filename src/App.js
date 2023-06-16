@@ -118,6 +118,7 @@ function Dashboard({ city, year }) {
       // fetchData함수에 city와 year 변수를 전달한다
       fetchData(city, year)
         .then(data => {
+          console.log(data)
           setData(data);
         })
         .catch(error => {
@@ -155,8 +156,6 @@ function Dashboard({ city, year }) {
 // 리차트 (리액트 차트 라이브러리)
 function Rechart({ accidents }) {
 
-  console.log(accidents); // 데이터가 전달되었는지 확인 후 아래 코드를 작성하세요
-
   // 리차트가 요구하는 형식에 맞게 데이터를 구성한다
   const chartData = accidents.map(accident => {
     return {
@@ -192,8 +191,6 @@ function Rechart({ accidents }) {
 
 // 카카오 지도 
 function KakaoMap({ accidents }) {
-
-  console.log(accidents) // 데이터가 전달되었는지 확인 후 아래 코드를 작성하세요
 
   // MapInfoWindow 컴포넌트를 재사용한다
   const mapInfoWindows = accidents.map(accident => (
