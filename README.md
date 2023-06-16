@@ -1,6 +1,6 @@
 # Public Data App 🚀
 
-> 공공데이터 API를 받아서 리액트로 뷰를 개발하는 그룹 프로젝트입니다
+> **Note** 공공데이터 API를 받아서 리액트로 뷰를 개발하는 그룹 프로젝트입니다
 
 ## 공공데이터 API
 1. [공공데이터 포털](https://www.data.go.kr/index.do)
