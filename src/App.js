@@ -146,7 +146,7 @@ function Dashboard({ city, year }) {
           <KakaoMap accidents={data.items.item} />
         </>
       ) : (
-        // 데이터가 없으면 사용자에게 자료가 없다는 것을 알려야 한다
+        // 데이터가 없으면 사용자에게 알려야 한다
         <p>자료가 없습니다</p>
       )}
     </>
