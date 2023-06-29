@@ -36,7 +36,7 @@ function fetchData(city, year) {
   const numOfRows = 10;
   const pageNo = 1;
 
-  // 자바스크립트에 내장된 fetch() 메서드를 사용하여 서버에 요청한다
+  // window에 내장된 fetch() 메서드를 사용하여 서버에 리소스를 요청한다
   const promise = fetch(`${endPoint}?serviceKey=${serviceKey}&searchYearCd=${year}&siDo=${city.siDo}&guGun=${city.goGun}&type=${type}&numOfRows=${numOfRows}&pageNo=${pageNo}`)
     .then(res => {
       // 서버의 응답코드(status)가 200(성공)이 아닌 경우 catch 블록에 응답 객체를 던진다
@@ -111,7 +111,7 @@ function Dashboard({ city, year }) {
 
   useEffect(() => {
 
-    // 서버에 요청하기 전 사용자에게 대기 상태를 먼저 보여주어야 한다
+    // 서버에 요청하기 전 사용자에게 대기 상태로 전환시킨다
     setIsLoaded(false); 
     setError(null);
 
