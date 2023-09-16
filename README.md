@@ -1,6 +1,6 @@
 # Public Data App 🚀
 
-> **Note** 공공데이터 API를 활용하고 리액트로 뷰를 개발하는 그룹 프로젝트
+> **Note** 공공데이터 API를 활용하고 리액트로 뷰를 개발하는 프로젝트입니다
 
 ## 공공데이터 API
 1. [공공데이터 포털](https://www.data.go.kr/index.do)
@@ -18,11 +18,6 @@
 ## 디플로이
 1. [깃허브 Pages](https://github.com/gitname/react-gh-pages)
 
-## 역할 분담 예시 (4인 기준)
-1. 레이아웃 및 디자인 담당
-2. 차트 담당
-3. 카카오 지도 담당
-4. 디플로이 담당
 
 
 
