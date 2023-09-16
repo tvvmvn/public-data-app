@@ -1,15 +1,18 @@
 import {
-  BarChart,
+  ComposedChart,
+  Line,
+  Area,
   Bar,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
-} from "recharts";
+  ResponsiveContainer,
+} from 'recharts';
 
-export default function RechartBar({ accidents }) {
+export default function Example({ accidents }) {
+
   const data = accidents.map(accident => {
     return {
       name: accident.spot_nm.split(" ").slice(2).join(" "),
@@ -20,26 +23,26 @@ export default function RechartBar({ accidents }) {
   })
 
   return (
-    <div className="h-[400px]">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="발생건수" fill="#0af" />
-          <Bar dataKey="중상자수" fill="#fa0" />
-          <Bar dataKey="사망자수" fill="#f00" />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  )
+    <ResponsiveContainer width="100%" height="100%">
+      <ComposedChart
+        layout="vertical"
+        width={500}
+        height={400}
+        data={data}
+        margin={{
+          top: 20,
+          left: 120,
+        }}
+      >
+        <CartesianGrid stroke="#f5f5f5" />
+        <XAxis type="number" />
+        <YAxis dataKey="name" type="category" scale="band" />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="발생건수" barSize={20} fill="#0088fe" />
+        <Bar dataKey="중상자수" barSize={20} fill="#ffbb28" />
+        <Bar dataKey="사망자수" barSize={20} fill="#ff8042" />
+      </ComposedChart>
+    </ResponsiveContainer>
+  );
 }
-
-

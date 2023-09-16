@@ -1,31 +1,15 @@
-import { useState, useEffect } from 'react';
 import { DISTRICTS } from "./constants/districts";
 import { YEARS } from './constants/years';
-import { getPublicData } from './service/api';
+import { useState, useEffect } from 'react';
+import Dashboard from './components/Dashboard';
 
 export default function App() {
   const [districtId, setDistrictId] = useState("d0");
   const [year, setYear] = useState(2023);
 
-  // key state
-  console.log(districtId, year);
-
-  useEffect(() => {
-    fetchData();
-  }, [districtId, year])
-
   useEffect(() => {
     document.title = "Public Data App";
   }, [])
-
-  async function fetchData() {
-    try {
-      const data = await getPublicData(districtId, year);
-      console.log(data);
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
   const districtList = DISTRICTS.map(district => (
     <option key={district.id} value={district.id}>
@@ -41,14 +25,30 @@ export default function App() {
 
   return (
     <>
-      <h1>App</h1>
-      <select onChange={({ target }) => setDistrictId(target.value)}>
-        {districtList}
-      </select>
+      <h1 className="text-4xl font-semibold my-8 text-center">
+        Bicycle Accidents Statistics
+      </h1>
+      
+      <div className="mb-4 flex justify-end px-8">
+        <select 
+          className="border-2 p-2"
+          onChange={({ target }) => setDistrictId(target.value)}
+        >
+          {districtList}
+        </select>
 
-      <select onChange={({ target }) => setYear(target.value)}>
-        {yearList}
-      </select>
+        <select 
+          className="border-2 p-2 ml-2"
+          onChange={({ target }) => setYear(target.value)}
+        >
+          {yearList}
+        </select>
+      </div>
+
+      <Dashboard 
+        districtId={districtId} 
+        year={year}
+      />
     </>  
   )
 }

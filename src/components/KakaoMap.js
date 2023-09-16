@@ -16,7 +16,7 @@ export default function KakaoMap({ accidents }) {
   return (
     <Map
       center={{ lat: accidents[0].la_crd, lng: accidents[0].lo_crd }}
-      style={{ width: "100%", height: "450px" }}
+      style={{ width: "100%", height: "100%" }}
       level={6}
     >
       {mapInfoWindows}
