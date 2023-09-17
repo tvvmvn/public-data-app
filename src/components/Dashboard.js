@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { getPublicData } from '../service/api';
 import KakaoMap from './KakaoMap';
 import RechartBar from './RechartBar';
-import RechartPie1 from './RechartPie1';
-import RechartPie2 from './RechartPie2';
+import RechartPie from './RechartPie';
 
 export default function Dashboard({
   districtId,
@@ -40,42 +39,30 @@ export default function Dashboard({
   }, [districtId, year])
 
   if (error) {
-    return (
-      <p className="p-8 text-center text-red-400">
-        failed to fetch
-      </p>
-    )
+    return <p className="p-8 text-center text-red-400">failed to fetch</p>
   }
 
   if (!isLoaded) {
-    return (
-      <p className="p-8 text-center">
-        fetching data...
-      </p>
-    )
+    return <p className="p-8 text-center">fetching data...</p>
   }
 
   return accidentCount > 0 ? (
-    <div className="flex px-4">
-      <div className="w-1/2 h-[600px]">
-        <KakaoMap accidents={accidents} />
-      </div>
-      <div className="w-1/2 pl-4 flex flex-col h-[600px]">
-        <div className="h-[300px]">
+    <>
+      {/* KakaoMap */}
+      <KakaoMap accidents={accidents} />
+      <div className="flex h-[350px] items-center mt-16 px-4">
+        {/* Rechart Bar */}
+        <div className="flex flex-col items-center w-1/2 h-full">
+          <h3 className="text-xl">Accidents per town</h3>
           <RechartBar accidents={accidents} />
         </div>
-        <div className="flex h-[300px] pt-4">
-          <div className="w-1/2 flex flex-col items-center">
-            <h3 className="text-xl">Accidents for District</h3>
-            <RechartPie1 accidents={accidents} />
-          </div>
-          <div className="w-1/2 flex flex-col items-center">
-            <h3 className="text-xl">Accidents for District</h3>
-            <RechartPie2 accidents={accidents} />
-          </div>
+        {/* Rechart Pie */}
+        <div className="w-1/2 flex h-full">
+          <RechartPie accidents={accidents} fill="#0088fe" />
+          <RechartPie accidents={accidents} fill="#ffbb28" />
         </div>
       </div>
-    </div>
+    </>
   ) : (
     <p className="p-8 text-center">No Data</p>
   )

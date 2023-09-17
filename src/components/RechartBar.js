@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-export default function Example({ accidents }) {
+export default function RechartBar({ accidents }) {
 
   const data = accidents.map(accident => {
     return {

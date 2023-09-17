@@ -5,7 +5,7 @@ import Dashboard from './components/Dashboard';
 
 export default function App() {
   const [districtId, setDistrictId] = useState("d0");
-  const [year, setYear] = useState(2023);
+  const [year, setYear] = useState(2022);
 
   useEffect(() => {
     document.title = "Public Data App";
@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <>
-      <h1 className="text-4xl font-semibold my-8 text-center">
+      <h1 className="text-4xl font-semibold mt-8 text-center">
         Bicycle Accidents Statistics
       </h1>
       
@@ -49,6 +49,10 @@ export default function App() {
         districtId={districtId} 
         year={year}
       />
+
+      <footer className="bg-gray-200 mt-16 p-16 text-center">
+        2023 &copy; tvvmvn
+      </footer>
     </>  
   )
 }

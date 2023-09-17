@@ -1,1 +1,1 @@
-export const YEARS = [2022, 2021, 2020];
+export const YEARS = [2022, 2021, 2020, 2019, 2018];
