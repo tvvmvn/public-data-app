@@ -4,10 +4,7 @@ import KakaoMap from './KakaoMap';
 import RechartBar from './RechartBar';
 import RechartPie from './RechartPie';
 
-export default function Dashboard({
-  districtId,
-  year
-}) {
+export default function Dashboard({ districtId, year }) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [accidents, setAccidents] = useState([]);

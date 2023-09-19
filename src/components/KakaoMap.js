@@ -2,6 +2,14 @@ import { useState } from 'react';
 import { Map, MapMarker, Roadview } from 'react-kakao-maps-sdk';
 
 export default function KakaoMap({ accidents }){
+  
+  /* 
+    필요에 따라 카카오 리액트 지도 API에서 제공하는 몇가지의 예제를 조합해야 한다.
+    아래 예시는 다음의 예제를 조합한 결과이다
+    1 여러개 마커 이벤트 등록하기
+    2 로드뷰 생성하기
+  */
+
   const center = accidents[0];
   const [spotId, setSpotId] = useState(center.afos_fid);
   const [roadViewCoord, setRoadViewCoord] = useState({
@@ -29,7 +37,7 @@ export default function KakaoMap({ accidents }){
   ))
   
   return (
-    <div className="relative h-[450px]">
+    <div className="relative h-[500px]">
       <Map 
         center={{ lat: center.la_crd, lng: center.lo_crd }}
         className="h-full"
@@ -38,7 +46,7 @@ export default function KakaoMap({ accidents }){
         {eventMarkerContainers}
       </Map>
       <Roadview
-        className="absolute top-[75px] right-[25px] w-[500px] h-[300px] z-10 rounded-2xl shadow-2xl"
+        className="absolute top-[100px] right-[25px] w-[500px] h-[300px] z-10 rounded-2xl shadow-2xl"
         position={{
           lat: roadViewCoord.lat,
           lng: roadViewCoord.lng,

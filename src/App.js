@@ -8,7 +8,7 @@ export default function App() {
   const [year, setYear] = useState(2022);
 
   useEffect(() => {
-    document.title = "Public Data App";
+    document.title = "자전거 사고 통계 조회";
   }, [])
 
   const districtList = DISTRICTS.map(district => (
@@ -25,25 +25,25 @@ export default function App() {
 
   return (
     <>
-      <header className="h-36 flex justify-center items-center relative">
+      <header className="h-32 flex justify-center items-center relative">
         <img 
           className="w-24"
           src={process.env.PUBLIC_URL + "/images/logo.png"} 
           alt="" 
         />
-        <h1 className="text-4xl">자전거 사고 통계 조회</h1>
+        <h1 className="text-4xl">{document.title}</h1>
 
         <div className="absolute flex right-0 h-full">
           <div className="flex items-center px-8">
             <select 
-              className="border-2 p-2"
+              className="p-2 bg-gray-200"
               onChange={({ target }) => setDistrictId(target.value)}
             >
               {districtList}
             </select>
 
             <select 
-              className="border-2 p-2 ml-2"
+              className="p-2 ml-2 bg-gray-200"
               onChange={({ target }) => setYear(target.value)}
             >
               {yearList}
