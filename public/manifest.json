@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "자전거 사고 조회 앱",
+  "name": "자전거 사고 통계 조회 앱",
   "icons": [
     {
       "src": "favicon.ico",

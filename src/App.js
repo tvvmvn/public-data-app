@@ -31,7 +31,7 @@ export default function App() {
           src={process.env.PUBLIC_URL + "/images/logo.png"} 
           alt="" 
         />
-        <h1 className="text-4xl">{document.title}</h1>
+        <h1 className="text-4xl">자전거 사고 통계 조회</h1>
 
         <div className="absolute flex right-0 h-full">
           <div className="flex items-center px-8">
