@@ -29,21 +29,21 @@ export default function KakaoMap({ accidents }){
   ))
   
   return (
-    <div className="flex h-[450px]">
+    <div className="relative h-[450px]">
       <Map 
         center={{ lat: center.la_crd, lng: center.lo_crd }}
-        className="w-2/3 h-full"
+        className="h-full"
         level={6}
       >
         {eventMarkerContainers}
       </Map>
       <Roadview
+        className="absolute top-[75px] right-[25px] w-[500px] h-[300px] z-10 rounded-2xl shadow-2xl"
         position={{
           lat: roadViewCoord.lat,
           lng: roadViewCoord.lng,
           radius: 50,
         }}
-        className="w-1/3 h-full"
       />
     </div>
   )

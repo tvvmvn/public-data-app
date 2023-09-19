@@ -19,14 +19,14 @@ export default function RechartPie({ accidents, fill }) {
   })
 
   const data = [
-    { name: "Wound", value: woundCount },
-    { name: "Injured", value: injuredCount },
-    { name: "Death", value: deathCount },
+    { name: "중상", value: woundCount },
+    { name: "경상", value: injuredCount },
+    { name: "사망", value: deathCount },
   ];
 
   return (
     <div className="w-1/2 flex flex-col h-full">
-      <h3 className="text-xl text-center">{totalCount} Occurence</h3>
+      <h3 className="text-xl text-center">총 {totalCount}건의 사고 발생</h3>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart width={400} height={400}>
           <Pie
@@ -96,7 +96,7 @@ function renderActiveShape(props) {
         d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">
-        {`${value} times`}
+        {value + "건"}
       </text>
       <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
         {(percent * 100).toFixed(2) + "%"}

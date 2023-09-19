@@ -28,7 +28,7 @@ export default function RechartBar({ accidents }) {
         height={400}
         data={data}
         margin={{
-          top: 20,
+          top: 40,
           left: 120,
         }}
       >

@@ -28,7 +28,7 @@ export default function Dashboard({
       setAccidentCount(data.totalCount);
 
     } catch (error) {
-      setIsLoaded(error)
+      setError(error)
     } finally {
       setIsLoaded(true);
     }
@@ -39,31 +39,35 @@ export default function Dashboard({
   }, [districtId, year])
 
   if (error) {
-    return <p className="p-8 text-center text-red-400">failed to fetch</p>
+    return <p className="p-8 text-center text-red-400">{error.message}</p>
   }
 
   if (!isLoaded) {
-    return <p className="p-8 text-center">fetching data...</p>
+    return (
+      <div className="p-8 flex justify-center">
+        <div className="w-12 h-12 border-8 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    )
   }
 
   return accidentCount > 0 ? (
     <>
       {/* KakaoMap */}
       <KakaoMap accidents={accidents} />
-      <div className="flex h-[350px] items-center mt-16 px-4">
+      <div className="flex items-center mt-12 px-4">
         {/* Rechart Bar */}
-        <div className="flex flex-col items-center w-1/2 h-full">
-          <h3 className="text-xl">Accidents per town</h3>
+        <div className="w-1/2 h-[350px] flex flex-col items-center">
+          <h3 className="text-xl">사고 장소별 상세 내용</h3>
           <RechartBar accidents={accidents} />
         </div>
         {/* Rechart Pie */}
-        <div className="w-1/2 flex h-full">
+        <div className="w-1/2 h-[300px] flex">
           <RechartPie accidents={accidents} fill="#0088fe" />
           <RechartPie accidents={accidents} fill="#ffbb28" />
         </div>
       </div>
     </>
   ) : (
-    <p className="p-8 text-center">No Data</p>
+    <p className="p-8 text-center">데이터가 없습니다</p>
   )
 }

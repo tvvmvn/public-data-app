@@ -25,34 +25,40 @@ export default function App() {
 
   return (
     <>
-      <h1 className="text-4xl font-semibold mt-8 text-center">
-        Bicycle Accidents Statistics
-      </h1>
+      <header className="h-36 flex justify-center items-center relative">
+        <img 
+          className="w-24"
+          src={process.env.PUBLIC_URL + "/images/logo.png"} 
+          alt="" 
+        />
+        <h1 className="text-4xl">자전거 사고 통계 조회</h1>
+
+        <div className="absolute flex right-0 h-full">
+          <div className="flex items-center px-8">
+            <select 
+              className="border-2 p-2"
+              onChange={({ target }) => setDistrictId(target.value)}
+            >
+              {districtList}
+            </select>
+
+            <select 
+              className="border-2 p-2 ml-2"
+              onChange={({ target }) => setYear(target.value)}
+            >
+              {yearList}
+            </select>
+          </div>
+        </div>
+      </header>
       
-      <div className="mb-4 flex justify-end px-8">
-        <select 
-          className="border-2 p-2"
-          onChange={({ target }) => setDistrictId(target.value)}
-        >
-          {districtList}
-        </select>
 
-        <select 
-          className="border-2 p-2 ml-2"
-          onChange={({ target }) => setYear(target.value)}
-        >
-          {yearList}
-        </select>
-      </div>
-
-      <Dashboard 
-        districtId={districtId} 
-        year={year}
-      />
-
-      <footer className="bg-gray-200 mt-16 p-16 text-center">
-        2023 &copy; tvvmvn
-      </footer>
+      <main className="pb-12">
+        <Dashboard 
+          districtId={districtId} 
+          year={year}
+        />
+      </main>
     </>  
   )
 }
