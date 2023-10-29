@@ -25,25 +25,30 @@ export default function App() {
 
   return (
     <>
-      <header className="h-32 flex justify-center items-center relative">
-        <img 
-          className="w-24"
-          src={process.env.PUBLIC_URL + "/images/logo.png"} 
-          alt="" 
-        />
-        <h1 className="text-4xl">자전거 사고 통계 조회</h1>
-
-        <div className="absolute flex right-0 h-full">
-          <div className="flex items-center px-8">
+      <header className="sticky top-0 z-[9999] shadow">
+        <div className="h-16  bg-white flex justify-between px-8">
+          <div className="flex items-center">
+            <div className="flex items-center">
+              <img 
+                className="w-12"
+                src={process.env.PUBLIC_URL + "/images/logo.png"} 
+                alt="" 
+              /> 
+              <h3 className="ml-2 text-2xl text-gray-500 font-semibold">
+                자전거 사고 통계 조회
+              </h3>
+            </div>
+          </div>
+          <div className="flex items-center">
             <select 
-              className="p-2 bg-gray-200"
+              className="p-2 bg-gray-200 rounded"
               onChange={({ target }) => setDistrictId(target.value)}
             >
               {districtList}
             </select>
 
             <select 
-              className="p-2 ml-2 bg-gray-200"
+              className="p-2 ml-2 bg-gray-200 rounded"
               onChange={({ target }) => setYear(target.value)}
             >
               {yearList}
@@ -53,7 +58,7 @@ export default function App() {
       </header>
       
 
-      <main className="pb-12">
+      <main className="pb-4">
         <Dashboard 
           districtId={districtId} 
           year={year}

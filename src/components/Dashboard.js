@@ -51,14 +51,15 @@ export default function Dashboard({ districtId, year }) {
     <>
       {/* KakaoMap */}
       <KakaoMap accidents={accidents} />
-      <div className="flex items-center mt-12 px-4">
+
+      <div className="mt-4 px-4 grid grid-cols-2 gap-4 h-[400px]">
         {/* Rechart Bar */}
-        <div className="w-1/2 h-[350px] flex flex-col items-center">
+        <div className="flex flex-col items-center bg-white p-8 shadow">
           <h3 className="text-xl">사고 장소별 상세 내용</h3>
           <RechartBar accidents={accidents} />
         </div>
         {/* Rechart Pie */}
-        <div className="w-1/2 h-[300px] flex">
+        <div className="p-8 flex bg-white shadow">
           <RechartPie accidents={accidents} fill="#0088fe" />
           <RechartPie accidents={accidents} fill="#ffbb28" />
         </div>
