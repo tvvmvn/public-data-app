@@ -23,7 +23,7 @@ https://tvvmvn.github.io/public-data-app
 1. [Rechart](https://recharts.org/en-US)
 
 ### 디플로이
-1. [깃허브 Pages](https://github.com/gitname/react-gh-pages)
+1. [Netlify](https://www.netlify.com/)
 
 
 
