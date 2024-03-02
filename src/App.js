@@ -1,11 +1,20 @@
-import { DISTRICTS } from "./constants/districts";
-import { YEARS } from './constants/years';
 import { useState, useEffect } from 'react';
 import Dashboard from './components/Dashboard';
 
+const DISTRICTS = [
+  { id: "d0", city: "서울특별시", name: "강남구" },
+  { id: "d1", city: "서울특별시", name: "마포구" },
+  { id: "d2", city: "서울특별시", name: "종로구" },
+  { id: "d3", city: "인천광역시", name: "연수구" },
+  { id: "d4", city: "인천광역시", name: "부평구" },
+  { id: "d5", city: "인천광역시", name: "남동구" },
+]
+
+const YEARS = [2023, 2022, 2021, 2020, 2019];
+
 export default function App() {
-  const [districtId, setDistrictId] = useState("d0");
-  const [year, setYear] = useState(2022);
+  const [districtId, setDistrictId] = useState(DISTRICTS[0].id);
+  const [year, setYear] = useState(YEARS[0]);
 
   useEffect(() => {
     document.title = "자전거 사고 통계 조회";

@@ -19,6 +19,7 @@ export default function Dashboard({ districtId, year }) {
       setError(null);
 
       const data = await getPublicData(districtId, year);
+      
       console.log(data);
 
       setAccidents(data.items.item);
