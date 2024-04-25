@@ -1,13 +1,14 @@
-const CODES = [
-  { city: 11, district: 680, districtId: "d0" },
-  { city: 11, district: 440, districtId: "d1" },
-  { city: 11, district: 110, districtId: "d2" },
-  { city: 28, district: 185, districtId: "d3" },
-  { city: 28, district: 237, districtId: "d4" },
-  { city: 28, district: 200, districtId: "d5" },
-]
-
 export async function getPublicData(districtId, year) {
+  
+  // 공공데이터의 지역 코드 
+  const CODES = [
+    { city: 11, district: 680, districtId: "d0" },
+    { city: 11, district: 440, districtId: "d1" },
+    { city: 28, district: 185, districtId: "d2" },
+    { city: 28, district: 237, districtId: "d3" },
+  ]
+
+  // districtId와 지역코드를 맵핑한다
   const code = CODES.find(CODE => CODE.districtId === districtId);
 
   let url = "https://apis.data.go.kr/B552061/frequentzoneBicycle/getRestFrequentzoneBicycle";

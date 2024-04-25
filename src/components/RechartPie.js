@@ -5,8 +5,9 @@ export default function RechartPie({ accidents, fill }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   /* 
-  공공데이터 API가 지역구에서 발생한 총 사고 건수 자료를 제공하고 있지 않기 때문에
-  아래와 같이 프론트엔드 개발자가 주어진 데이터를 가공해야 하는 경우도 있다
+  공공데이터 API가 지역구에서 발생한 총 사고 자료를 제공하고 있지 않다.
+  따라서 원하는 자료를 얻기 위해 아래와 같이 프론트엔드 개발자가 주어진 데이터를 
+  가공해야 하는 경우도 있다
   */
 
   let totalCount = 0;
@@ -23,6 +24,7 @@ export default function RechartPie({ accidents, fill }) {
     injuredCount += accident.sl_dnv_cnt;
   })
 
+  // 지역구의 총 사고 자료
   const data = [
     { name: "중상", value: woundCount },
     { name: "경상", value: injuredCount },
@@ -32,6 +34,7 @@ export default function RechartPie({ accidents, fill }) {
   return (
     <div className="w-1/2 flex flex-col h-full">
       <h3 className="text-xl text-center">총 {totalCount}건의 사고 발생</h3>
+      
       <ResponsiveContainer width="100%" height="100%">
         <PieChart width={400} height={400}>
           <Pie

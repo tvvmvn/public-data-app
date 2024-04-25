@@ -22,8 +22,7 @@ https://tvvmvn.github.io/public-data-app
 한글 문서 등
 
 2. 데이터 요청 및 확인 \
-공공데이터 문서와 API 테스트 도구인 POSTMAN을 활용하여
-서버 요청을 테스트합니다.
+공공데이터 문서와 API 테스트 도구를 활용하여 서버 요청을 테스트합니다.
 
 3. 프로토타입 제작 \
 뷰 개발의 가장 첫번째 단계입니다. 완성된 모습을 시각적으로만 표현합니다
@@ -31,7 +30,7 @@ https://tvvmvn.github.io/public-data-app
 4. 실제 컴포넌트로 대체 \
 프로토타입 개발에 사용된 가짜 컴포넌트를 실제 컴포넌트로 대체합니다
 
-5. Deploy 
+5. Deploy \
 프로젝트를 빌드 후 Netlify에 업로드합니다 \
 빌드 명령어 - npm run deploy
 

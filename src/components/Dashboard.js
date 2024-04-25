@@ -10,15 +10,14 @@ export default function Dashboard({ districtId, year }) {
   const [accidents, setAccidents] = useState([]);
   const [accidentCount, setAccidentCount] = useState(0);
 
-  // key state tracking
-  console.log(accidents);
-
   async function fetchData() {
     try {
       setIsLoaded(false);
       setError(null);
 
       const data = await getPublicData(districtId, year);
+      
+      // 응답 데이터
       console.log(data);
 
       setAccidents(data.items.item);
@@ -33,7 +32,7 @@ export default function Dashboard({ districtId, year }) {
 
   useEffect(() => {
     fetchData();
-  }, [districtId, year])
+  }, [districtId, year]);
 
   if (error) {
     return (
@@ -52,7 +51,7 @@ export default function Dashboard({ districtId, year }) {
   }
 
   return accidentCount > 0 ? (
-    <>
+    <div className="pb-8">
       {/* KakaoMap */}
       <KakaoMap accidents={accidents} />
 
@@ -62,14 +61,14 @@ export default function Dashboard({ districtId, year }) {
           <h3 className="text-xl">사고 장소별 상세 내용</h3>
           <RechartBar accidents={accidents} />
         </div>
-        
+
         {/* Rechart Pie */}
         <div className="p-8 flex bg-white shadow">
           <RechartPie accidents={accidents} fill="#0088fe" />
           <RechartPie accidents={accidents} fill="#ffbb28" />
         </div>
       </div>
-    </>
+    </div>
   ) : (
     <p className="p-8 text-center">데이터가 없습니다</p>
   )

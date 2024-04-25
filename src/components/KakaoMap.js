@@ -4,11 +4,12 @@ import { Map, MapMarker, Roadview } from 'react-kakao-maps-sdk';
 export default function KakaoMap({ accidents }){
   
   /* 
-    필요에 따라 카카오 리액트 지도 API에서 제공하는 몇가지의 예제를 조합해야 한다.
-    아래 예시는 다음의 예제를 조합했다
+  필요에 따라 카카오 리액트 지도 API에서 제공하는 몇가지의 예제를 조합해야 한다.
+  아래 예시는 다음의 예제를 조합했다
 
-    1 여러개 마커 이벤트 등록하기
-    2 로드뷰 생성하기
+  1 마커에 클릭 이벤트 등록하기
+  2 여러개 마커 이벤트 등록하기
+  3 로드뷰 생성하기
   */
 
   const center = accidents[0];
