@@ -12,8 +12,7 @@ import {
 export default function RechartBar({ accidents }) {
 
   /*
-    아래의 data 변수는 
-    리차트 라이브러리가 요구하는 형식으로 기존의 데이터를 가공한 결과이다
+  아래의 data는 리차트가 요구하는 형식으로 기존의 데이터를 가공한 결과이다
   */
 
   const data = accidents.map(accident => {

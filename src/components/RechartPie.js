@@ -5,8 +5,8 @@ export default function RechartPie({ accidents, fill }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   /* 
-    공공데이터 API가 지역구에서 발생한 총 사고 건수 자료를 제공하고 있지 않기 때문에
-    필요한 경우 아래와 같이 프론트엔드 개발자가 데이터를 가공하여 원하는 데이터를 구성할 수 있다
+  공공데이터 API가 지역구에서 발생한 총 사고 건수 자료를 제공하고 있지 않기 때문에
+  아래와 같이 프론트엔드 개발자가 주어진 데이터를 가공해야 하는 경우도 있다
   */
 
   let totalCount = 0;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Dashboard from './components/Dashboard';
 
 const DISTRICTS = [
@@ -10,15 +10,11 @@ const DISTRICTS = [
   { id: "d5", city: "인천광역시", name: "남동구" },
 ]
 
-const YEARS = [2023, 2022, 2021, 2020, 2019];
+const YEARS = [2022, 2021, 2020];
 
 export default function App() {
   const [districtId, setDistrictId] = useState(DISTRICTS[0].id);
   const [year, setYear] = useState(YEARS[0]);
-
-  useEffect(() => {
-    document.title = "자전거 사고 통계 조회";
-  }, [])
 
   const districtList = DISTRICTS.map(district => (
     <option key={district.id} value={district.id}>
@@ -35,7 +31,7 @@ export default function App() {
   return (
     <>
       <header className="sticky top-0 z-[9999] shadow">
-        <div className="h-16  bg-white flex justify-between px-8">
+        <div className="h-16 bg-white flex justify-between px-8">
           <div className="flex items-center">
             <div className="flex items-center">
               <img 
@@ -66,12 +62,8 @@ export default function App() {
         </div>
       </header>
       
-
       <main className="pb-4">
-        <Dashboard 
-          districtId={districtId} 
-          year={year}
-        />
+        <Dashboard districtId={districtId} year={year} />
       </main>
     </>  
   )

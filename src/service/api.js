@@ -8,7 +8,7 @@ const CODES = [
 ]
 
 export async function getPublicData(districtId, year) {
-  const code = CODES.find(CODE => CODE.districtId == districtId);
+  const code = CODES.find(CODE => CODE.districtId === districtId);
 
   let url = "https://apis.data.go.kr/B552061/frequentzoneBicycle/getRestFrequentzoneBicycle";
 
