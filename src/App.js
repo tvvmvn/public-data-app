@@ -11,8 +11,8 @@ const DISTRICTS = [
 const YEARS = [2022, 2021, 2020];
 
 export default function App() {
-  const [districtId, setDistrictId] = useState(DISTRICTS[0].id);
-  const [year, setYear] = useState(YEARS[0]);
+  const [districtId, setDistrictId] = useState("d0");
+  const [year, setYear] = useState(2022);
 
   const districtList = DISTRICTS.map(district => (
     <option key={district.id} value={district.id}>
