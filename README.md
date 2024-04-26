@@ -32,7 +32,7 @@ https://tvvmvn.github.io/public-data-app
 
 5. Deploy \
 프로젝트를 빌드 후 Netlify에 업로드합니다 \
-빌드 명령어 - npm run deploy
+빌드 명령어 - npm run build
 
 
 ## 업무분담 예시
