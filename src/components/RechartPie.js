@@ -1,114 +1,84 @@
-import { useState } from 'react';
-import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
+/* eslint-disable no-shadow */
+import { PieChart, Pie, Cell } from 'recharts';
 
-export default function RechartPie({ accidents, fill }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  /* 
-  공공데이터 API가 지역구에서 발생한 총 사고 자료를 제공하고 있지 않다.
-  따라서 원하는 자료를 얻기 위해 아래와 같이 프론트엔드 개발자가 주어진 데이터를 
-  가공해야 하는 경우도 있다
-  */
+export default function Sample({ accidents }) {
 
   let totalCount = 0;
-  let deathCount = 0;
-  let woundCount = 0;
-  let injuredCount = 0;
-  let casualtiesCount = 0;
 
   accidents.forEach(accident => {
     totalCount += accident.occrrnc_cnt;
-    casualtiesCount += accident.caslt_cnt;
-    deathCount += accident.dth_dnv_cnt;
-    woundCount += accident.se_dnv_cnt;
-    injuredCount += accident.sl_dnv_cnt;
   })
 
-  // 지역구의 총 사고 자료
+  const RADIAN = Math.PI / 180;
   const data = [
-    { name: "중상", value: woundCount },
-    { name: "경상", value: injuredCount },
-    { name: "사망", value: deathCount },
+    { name: 'D', value: 45, color: 'lightgreen' },
+    { name: 'C', value: 45, color: 'gold' },
+    { name: 'B', value: 45, color: 'orange' },
+    { name: 'A', value: 45, color: 'orangered' },
   ];
+  const cx = 150;
+  const cy = 200;
+  const iR = 50;
+  const oR = 100;
+  // const value = 90;
+  const value = totalCount > 19 ? 180 : totalCount * 10;
+
+  const needle = (value, data, cx, cy, iR, oR, color) => {
+    let total = 0;
+    data.forEach((v) => {
+      total += v.value;
+    });
+    const ang = 180.0 * (1 - value / total);
+    const length = (iR + 2 * oR) / 3;
+    const sin = Math.sin(-RADIAN * ang);
+    const cos = Math.cos(-RADIAN * ang);
+    const r = 5;
+    const x0 = cx + 5;
+    const y0 = cy + 5;
+    const xba = x0 + r * sin;
+    const yba = y0 - r * cos;
+    const xbb = x0 - r * sin;
+    const ybb = y0 + r * cos;
+    const xp = x0 + length * cos;
+    const yp = y0 + length * sin;
+
+    return [
+      <circle cx={x0} cy={y0} r={r} fill={color} stroke="none" />,
+      <path d={`M${xba} ${yba}L${xbb} ${ybb} L${xp} ${yp} L${xba} ${yba}`} stroke="#none" fill={color} />,
+    ];
+  };
 
   return (
-    <div className="w-1/2 flex flex-col h-full">
-      <h3 className="text-xl text-center">총 {totalCount}건의 사고 발생</h3>
-      
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart width={400} height={400}>
-          <Pie
-            activeIndex={activeIndex}
-            activeShape={renderActiveShape}
-            data={data}
-            cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={80}
-            fill={fill}
-            dataKey="value"
-            onMouseEnter={(_, index) => setActiveIndex(index)}
-          />
-        </PieChart>
-      </ResponsiveContainer>
+    <div>
+      <h3 className="text-lg text-gray-500 font-bold text-center mt-4">
+        총 {totalCount}건의 사고 발생
+      </h3>
+      <PieChart width={300} height={250}>
+        <Pie
+          dataKey="value"
+          startAngle={180}
+          endAngle={0}
+          data={data}
+          cx={cx}
+          cy={cy}
+          innerRadius={iR}
+          outerRadius={oR}
+          fill="#8884d8"
+          stroke="none"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
+        </Pie>
+        {needle(value, data, cx, cy, iR, oR, '#ddd')}
+      </PieChart>
+
+      <ul className="px-4">
+        <li className="my-2 font-bold text-green-400">주의 (NOTICE)</li>
+        <li className="my-2 font-bold text-yellow-400">경계 (CAUTION)</li>
+        <li className="my-2 font-bold text-orange-400">경고 (WARNING)</li>
+        <li className="my-2 font-bold text-red-400">위험 (DANGER)</li>
+      </ul>
     </div>
   );
 }
-
-function renderActiveShape(props) {
-  const RADIAN = Math.PI / 180;
-  const { 
-    cx, cy, 
-    midAngle, 
-    innerRadius, outerRadius, 
-    startAngle, endAngle, 
-    fill, 
-    payload, 
-    percent, 
-    value 
-  } = props;
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + (outerRadius + 10) * cos;
-  const sy = cy + (outerRadius + 10) * sin;
-  const mx = cx + (outerRadius + 30) * cos;
-  const my = cy + (outerRadius + 30) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-  const ey = my;
-  const textAnchor = cos >= 0 ? 'start' : 'end';
-
-  return (
-    <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-        {payload.name}
-      </text>
-      <Sector
-        cx={cx}
-        cy={cy}
-        innerRadius={innerRadius}
-        outerRadius={outerRadius}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        fill={fill}
-      />
-      <Sector
-        cx={cx}
-        cy={cy}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        innerRadius={outerRadius + 6}
-        outerRadius={outerRadius + 10}
-        fill={fill}
-      />
-      <path 
-        d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
-      <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">
-        {value + "건"}
-      </text>
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        {(percent * 100).toFixed(2) + "%"}
-      </text>
-    </g>
-  );
-};

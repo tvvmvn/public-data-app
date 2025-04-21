@@ -24,37 +24,33 @@ export default function KakaoMap({ accidents }){
     setRoadViewCoord({ lat: accident.la_crd, lng: accident.lo_crd });
   }
 
-  const eventMarkerContainers = accidents.map(accident => (
+  const eventMarkerContainers = accidents.map((accident, index) => (
     <MapMarker
       key={accident.afos_fid}
       position={{ lat: accident.la_crd, lng: accident.lo_crd }}
       onClick={() => handleClick(accident)}
     >
-      {accident.afos_fid === spotId && (
-        <div style={{ color: "#000" }}>
-          {accident.spot_nm.split(" ").slice(2).join(" ")}
-        </div>
-      )}
+      <div style={{ color: "#000" }}>
+        {++index} {accident.spot_nm.split(" ").slice(2).join(" ")}
+      </div>
     </MapMarker>
   ))
   
   return (
-    <div className="relative h-[500px] shadow">
-      <Map 
-        center={{ lat: center.la_crd, lng: center.lo_crd }}
-        className="h-full"
-        level={6}
-      >
-        {eventMarkerContainers}
-      </Map>
-      <Roadview
-        className="absolute bottom-4 right-4 w-[400px] h-[200px] z-10 border-4 border-white"
+    <Map 
+      center={{ lat: center.la_crd, lng: center.lo_crd }}
+      className="h-full"
+      level={6}
+    >
+      {eventMarkerContainers}
+      {/* <Roadview
+        className="absolute bottom-4 right-4 w-[400px] h-[200px] z-10"
         position={{
           lat: roadViewCoord.lat,
           lng: roadViewCoord.lng,
           radius: 50,
         }}
-      />
-    </div>
+      /> */}
+    </Map>
   )
 }

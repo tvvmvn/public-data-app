@@ -11,6 +11,7 @@ const DISTRICTS = [
 const YEARS = [2022, 2021, 2020];
 
 export default function App() {
+  
   const [districtId, setDistrictId] = useState("d0");
   const [year, setYear] = useState(2022);
 
@@ -28,7 +29,7 @@ export default function App() {
 
   return (
     <>
-      <header className="sticky top-0 z-[9999] shadow">
+      <header className="fixed top-0 w-full z-[9999] shadow">
         <div className="h-16 bg-white flex justify-between px-8">
           <div className="flex items-center">
             <img
@@ -36,20 +37,20 @@ export default function App() {
               src={process.env.PUBLIC_URL + "/logo.png"}
               alt="logo"
             />
-            <h3 className="ml-2 text-2xl text-gray-400 font-semibold">
+            <h3 className="ml-2 text-2xl text-gray-500 font-semibold">
               자전거 사고 통계 조회
             </h3>
           </div>
           <div className="flex items-center">
             <select 
-              className="p-2 border border-black rounded"
+              className="p-2 border border-gray-400 rounded"
               onChange={({ target }) => setDistrictId(target.value)}
             >
               {districtList}
             </select>
 
             <select 
-              className="p-2 ml-2 border border-black rounded"
+              className="p-2 ml-2 border border-gray-400 rounded"
               onChange={({ target }) => setYear(target.value)}
             >
               {yearList}

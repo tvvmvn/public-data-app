@@ -1,4 +1,4 @@
-export async function getPublicData(districtId, year) {
+export default async function getPublicData(districtId, year) {
   
   // 공공데이터의 지역 코드 
   const CODES = [
